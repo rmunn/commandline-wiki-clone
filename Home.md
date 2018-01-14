@@ -1,8 +1,13 @@
-Version 2.0 is currently a beta version.
+Version 2 is currently released as [![NuGet](https://img.shields.io/nuget/v/CommandLineParser.svg)](https://nuget.org/packages/CommandLineParser)
 
-## Overview
-The package has no dependencies. The reference to `FSharp.Core.dll` is only required at _compile time_ or at _runtime_ for **F#** projects (which contain this reference by default).
+```
+PM> Install-Package CommandLineParser
+```
 
+# Overview
+The package has no dependencies. The standard `CommandLineParser` package does not include references/dependencies for FSharp. Users that want support for F# should target the `CommandLineParser.FSharp` package.
+
+# Getting Started
 The Parser is activated from the `Parser` class, defined in the `CommandLine` namespace. I suggest that you use the pre-configured `Default` singleton, and only construct your own instance when really required.
 
 ```csharp
@@ -24,8 +29,8 @@ The default instance `Parser.Default` initializes with `ParserSettings.HelpWrite
 
 These features are optional.
  
-## Options
-Version 2.0 uses only two attributes to describe option syntax: `Option` and `Value`·
+# Parsed Options and Value
+Version 2 uses only two attributes to describe option syntax: `Option` and `Value`·
 
 `Option` works much like in previous versions, but it can be applied to scalar or sequence values (`IEnumerable<T>`).
 
@@ -33,7 +38,7 @@ When applied to sequences you can also define `Min` and `Max` properties to spec
 
 `Value` resembles `ValueOption` and `ValueList` from previous versions. Akin to the new `Option` attribute, it can be applied to sequences, and now support the `Required` property too.
 
-### [Value] Attribute
+## [Value] Attribute
 
 Values are partitioned by index. For example:
 ```csharp
@@ -70,7 +75,7 @@ class Options {
 }
 ```
 
-### [Option] Attribute
+## [Option] Attribute
 
 If you Omit the option name the long name will be inferred from the member's name.
 ```csharp
@@ -104,7 +109,7 @@ You can also specify a `Min` constraint or a `Max` constraint alone: this means 
 
 You could overlay `Min=1` with `Required=true` but there's no point in doing so because the parser will check `Required` before the `Min` constraint. In this case you should favour `Min=1` whilst `Min=1, Max=1` should be avoided (even though they will behave as expected) in favour of `Required=true`. 
 
-## Parsing
+# Parsing
 
 Parsing is a single liner:
 ```csharp
@@ -142,6 +147,8 @@ int Main(string[] args) {
 ```
 
 ## Verbs
+
+Verbs help delineate and separate options and values for multiple commands within a single app.  A common usage of verbs in a sample ftp program could be to provide a specific commands: upload, download, delete, etc.
 
 To use verb commands create an option class for each verb decorated with the `[Verb]` attribute:
 ```csharp
@@ -196,7 +203,7 @@ $ app help
 ```
 Or will display a help screen for available verbs.
 
-## Immutable Target
+## Immutable Options Type
 
 If you develop according to functional programming, you probably won't define a mutable type like the ones presented in samples.
 
