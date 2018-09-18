@@ -316,10 +316,47 @@ var arguments = CommandLine.Parser.Default.FormatCommandLine(options, config => 
 
 ## [Usage] Attribute
 
-The `Usage` attribute is a new **2.0.x** feature that allows you to format application usage examples with ease. You've to mark a static property of your _instance_ or _verb instance_ class and supply metadata as in the snippet above. Note that it lives in the `CommandLine.Text` namespace, unlike the Option attribute.
+The `Usage` attribute is a new **2.0.x** feature that allows you to add a properly formatted `USAGE:` section to your help screen. One or more usage examples can be defined, by providing a static `IEnumerable<Example>` property annotated with the `[Usage]` attribute. 
+
 ```csharp
 using CommandLine.Text;
 
+class Options
+{
+    [Option("filename", Required = false, HelpText = "Input filename.")]
+    public string filename { get; set; }
+
+    [Usage(ApplicationAlias = "yourapp")]
+    public static IEnumerable<Example> Examples
+    {
+        get
+        {
+            return new List<Example>() {
+                new Example("Convert file to a trendy format", new Options { filename = "file.bin" })
+            };
+        }
+    }
+}
+```
+Will produce the following help text:
+```bash
+CommandLine 2.0.201-alpha
+Copyright (c) 2005 - 2015 Giacomo Stelluti Scala
+USAGE:
+Convert file to a trendy format:
+yourapp --filename file.bin
+
+  --filename    Input filename.
+
+  --help        Display this help screen.
+
+  --version     Display version information.
+  ```
+
+
+More than one usage can be defined. It is also possible to format the displayed usage by providing a list of `UnParserSettings`. 
+
+```csharp
 class Options {
   // Normal options here.
 
@@ -334,21 +371,7 @@ class Options {
 }
 ```
 
-The real constraints are visibility, data type and the need to define the property as static; anyway I'll suggest you to name such property `Examples` as standard.
-
-The `Example` class is used to supply metadata to `HelpText.AutoBuild()` that will add a properly formatted `USAGE:` section to your help screen.
-```csharp
-class Example {
-  public Example(
-    string helpText, // description of example
-    IEnumerable<UnParserSettings> formatStyles, // different styles of generated command line
-    object sample // instance with sample data
-  )
-  // ...omissis...
-}
-```
-
-The important thing to know is that `UnParserSettings` is exactly the same type accepted by `Parser.FormatCommandLine<T>(T options, Action<UnParserSettings>)`; since this API is the same used internally to generate part of the example command line.
+When working with formatting styles, the important thing to know is that `UnParserSettings` is exactly the same type accepted by `Parser.FormatCommandLine<T>(T options, Action<UnParserSettings>)`; since this API is the same used internally to generate part of the example command line.
 
 `UnParserSettings.WithGroupSwitchesOnly()` and `UnParserSettings.WithUseEqualTokenOnly()` are just factory methods to simplify the creation of an instance with the property in the name set to true.
 
