@@ -1,5 +1,3 @@
-# Getting Started
-
 Firstly, install the package within the Package Manager in Visual Studio to download and setup references. (Tools, Nuget Package Manager, Package Manager Console)
 
 ```
