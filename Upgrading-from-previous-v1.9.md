@@ -1,4 +1,5 @@
-# Parsed Options and Value
+WIP.  Need to show how to modify the parsing calls from old v1.9 to new v2.x
+
 Version 2 uses only two attributes to describe option syntax: `Option` and `Value`·
 
 `Option` works much like in previous versions, but it can be applied to scalar or sequence values (`IEnumerable<T>`).
