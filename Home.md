@@ -50,6 +50,11 @@ type options = {
 
 As you can see the `options.offset` record member was defined as `option<int64>` since the library has full support for `option<'a>` (full CLR name type name `Microsoft.FSharp.Core.FSharpOption<T>`).
 
+**Note:**
+
+The properties of the `Options` class should be public. Internal properties are not updated by the Parser.
+
+
 ## Help Screen
 
 One of strengths of this library lies in the ability to automatically generate a help screen for the end user. See the [[Generating Help and Usage information]] page for more information. 
