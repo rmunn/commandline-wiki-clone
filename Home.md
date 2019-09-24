@@ -86,7 +86,7 @@ class Options
 ```
 Will produce the following help text:
 ```bash
-CommandLine 2.0.201-alpha
+yourapp 2.0.201-alpha
 Copyright (c) 2005 - 2015 Giacomo Stelluti Scala
 USAGE:
 Convert file to a trendy format:
@@ -130,7 +130,7 @@ If you're an experienced command line user, you're wondering how `AutoBuild()` w
 
 The above output is taken from a unit test.
 ```bash
-CommandLine 2.0.201-alpha
+yourapp 2.0.201-alpha
 Copyright (c) 2005 - 2015 Giacomo Stelluti Scala
 
 ERROR(S):
