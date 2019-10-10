@@ -5,6 +5,7 @@ Version 2 is currently released as [![NuGet](https://img.shields.io/nuget/v/Comm
 # Overview
 - No dependencies! The standard `CommandLineParser` package has no dependencies.  If you want FSharp support, you should reference the `CommandLineParser.FSharp` package.
 - [[Getting Started]] will show you how to get started with step-by-step instructions
+- [[Mutually Exclusive Options]] will show you how to get use Mutually Exclusive Options.
 - [[Verbs]] page shows you how to construct verbs like the popular git command.
 - [[Generating Help and Usage information]] The library by default will automatically generate help and usage information for you.  
 - [[Unparsing]] You can transform back a parsed instance or a freshly created one into a string with command line arguments.
