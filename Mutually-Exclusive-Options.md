@@ -1,11 +1,6 @@
-# Mutually Exclusive Options
- 
-
 You can define options as belonging to a set (group) that is mutually exclusive between groups. It means that you can run commands of one set at a time.
 You can't mix commands of more than one set otherwise you get an error.
 Mutually Exclusive is available by default. 
-
-
 
 > NOTE: Mutually Exclusive Options in V 2.x are  different than V 1.x and the Parser option `MutuallyExclusive` is removed. Also `MutuallyExclusiveSet` property is changed to `SetName`.
 

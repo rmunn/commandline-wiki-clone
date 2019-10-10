@@ -1,0 +1,42 @@
+# CommandLine Namespace
+
+## Classes
+&nbsp;<table><tr><th></th><th>Class</th><th>Description</th></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_BadFormatConversionError">BadFormatConversionError</a></td><td>
+Models an error generated when a value conversion fails.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_BadFormatTokenError">BadFormatTokenError</a></td><td>
+Models an error generated when an invalid token is detected.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_BadVerbSelectedError">BadVerbSelectedError</a></td><td>
+Models an error generated when an unknown verb is detected.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_BaseAttribute">BaseAttribute</a></td><td>
+Models a base attribute to define command line syntax.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_Error">Error</a></td><td>
+Base type of all errors.</td></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CommandLine_ErrorExtensions">ErrorExtensions</a></td><td /></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_HelpRequestedError">HelpRequestedError</a></td><td>
+Models an error generated when a user explicitly requests help.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_HelpTextExtensions">HelpTextExtensions</a></td><td /></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_HelpVerbRequestedError">HelpVerbRequestedError</a></td><td>
+Models an error generated when a user explicitly requests help in verb commands scenario.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_InvalidAttributeConfigurationError">InvalidAttributeConfigurationError</a></td><td>
+Models an error generated when an invalid token is detected.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_MissingRequiredOptionError">MissingRequiredOptionError</a></td><td>
+Models an error generated when a required option is required.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_MissingValueOptionError">MissingValueOptionError</a></td><td>
+Models an error generated when an option lacks its value.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_MutuallyExclusiveSetError">MutuallyExclusiveSetError</a></td><td>
+Models an error generated when a an option from another set is defined.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_NamedError">NamedError</a></td><td>
+Base type of all erros with name information.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_NameInfo">NameInfo</a></td><td>
+Models name information, used in <a href="T_CommandLine_Error">Error</a> instances.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_NotParsed_1">NotParsed(T)</a></td><td>
+It contains a sequence of <a href="T_CommandLine_Error">Error</a>.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_NoVerbSelectedError">NoVerbSelectedError</a></td><td>
+Models an error generated when no verb is selected.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_NullInstance">NullInstance</a></td><td>
+Models a null result when constructing a <a href="T_CommandLine_ParserResult_1">ParserResult(T)</a> in a faling verbs scenario.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_OptionAttribute">OptionAttribute</a></td><td>
+Models an option specification.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_Parsed_1">Parsed(T)</a></td><td>
+It contains an instance of type *T* with parsed values.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_Parser">Parser</a></td><td>
+Provides methods to parse command line arguments.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_ParserExtensions">ParserExtensions</a></td><td>
+Defines generic overloads for <a href="M_CommandLine_Parser_ParseArguments">ParseArguments(IEnumerable(String), Type[])</a>.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_ParserResult_1">ParserResult(T)</a></td><td>
+Models a parser result. When inherited by <a href="T_CommandLine_Parsed_1">Parsed(T)</a>, it contains an instance of type *T* with parsed values. When inherited by <a href="T_CommandLine_NotParsed_1">NotParsed(T)</a>, it contains a sequence of <a href="T_CommandLine_Error">Error</a>.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_ParserResultExtensions">ParserResultExtensions</a></td><td>
+Provides convenience extension methods for <a href="T_CommandLine_ParserResult_1">ParserResult(T)</a>.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_ParserSettings">ParserSettings</a></td><td>
+Provides settings for <a href="T_CommandLine_Parser">Parser</a>. Once consumed cannot be reused.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_RepeatedOptionError">RepeatedOptionError</a></td><td>
+Models an error generated when an option is repeated two or more times.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_SequenceOutOfRangeError">SequenceOutOfRangeError</a></td><td>
+Models an error generated when a sequence value lacks elements.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_SetValueExceptionError">SetValueExceptionError</a></td><td>
+Models as error generated when exception is thrown at Property.SetValue</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_TokenError">TokenError</a></td><td>
+Base type of all errors related to bad token detection.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_TypeInfo">TypeInfo</a></td><td /></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_UnknownOptionError">UnknownOptionError</a></td><td>
+Models an error generated when an unknown option is detected.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_UnParserExtensions">UnParserExtensions</a></td><td>
+Provides overloads to unparse options instance.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_UnParserSettings">UnParserSettings</a></td><td>
+Provides settings for when formatting command line from an options instance../>.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_ValueAttribute">ValueAttribute</a></td><td>
+Models an value specification, or better how to handle values not bound to options.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_VerbAttribute">VerbAttribute</a></td><td>
+Models a verb command specification.</td></tr><tr><td>![Public class](media/pubclass.gif "Public class")</td><td><a href="T_CommandLine_VersionRequestedError">VersionRequestedError</a></td><td>
+Models an error generated when a user explicitly requests version.</td></tr></table>
+
+## Enumerations
+&nbsp;<table><tr><th></th><th>Enumeration</th><th>Description</th></tr><tr><td>![Public enumeration](media/pubenumeration.gif "Public enumeration")</td><td><a href="T_CommandLine_ErrorType">ErrorType</a></td><td>
+Discriminator enumeration of <a href="T_CommandLine_Error">Error</a> derivates.</td></tr><tr><td>![Public enumeration](media/pubenumeration.gif "Public enumeration")</td><td><a href="T_CommandLine_ParserResultType">ParserResultType</a></td><td>
+Discriminator enumeration of <a href="T_CommandLine_ParserResultType">ParserResultType</a> derivates.</td></tr></table>&nbsp;

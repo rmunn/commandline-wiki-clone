@@ -1,0 +1,13 @@
+# CSharpx Namespace
+
+## Classes
+&nbsp;<table><tr><th></th><th>Class</th><th>Description</th></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Either">Either</a></td><td /></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Either_2">Either(TLeft, TRight)</a></td><td /></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_EitherExtensions">EitherExtensions</a></td><td /></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_EnumerableExtensions">EnumerableExtensions</a></td><td /></tr><tr><td>![Private class](media/privclass.gif "Private class")</td><td><a href="T_CSharpx_EnumerableExtensions_MaterializedEnumerable_1">EnumerableExtensions.MaterializedEnumerable(T)</a></td><td /></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Just_1">Just(T)</a></td><td>
+Models a <a href="T_CSharpx_Maybe">Maybe</a> when contains a value.</td></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Left_2">Left(TLeft, TRight)</a></td><td /></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Maybe">Maybe</a></td><td>
+Provides static methods for manipulating <a href="T_CSharpx_Maybe">Maybe</a>.</td></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Maybe_1">Maybe(T)</a></td><td>
+The Maybe type models an optional value. A value of type Maybe a either contains a value of type a (represented as Just a), or it is empty (represented as Nothing).</td></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_MaybeExtensions">MaybeExtensions</a></td><td>
+Provides convenience extension methods for <a href="T_CSharpx_Maybe">Maybe</a>.</td></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Nothing_1">Nothing(T)</a></td><td>
+Models a <a href="T_CSharpx_Maybe">Maybe</a> when in empty state.</td></tr><tr><td>![Protected class](media/protclass.gif "Protected class")</td><td><a href="T_CSharpx_Right_2">Right(TLeft, TRight)</a></td><td /></tr></table>
+
+## Enumerations
+&nbsp;<table><tr><th></th><th>Enumeration</th><th>Description</th></tr><tr><td>![Protected enumeration](media/protenumeration.gif "Protected enumeration")</td><td><a href="T_CSharpx_EitherType">EitherType</a></td><td /></tr><tr><td>![Protected enumeration](media/protenumeration.gif "Protected enumeration")</td><td><a href="T_CSharpx_MaybeType">MaybeType</a></td><td>
+Discriminator for <a href="T_CSharpx_Maybe">Maybe</a>.</td></tr></table>&nbsp;

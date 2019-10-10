@@ -1,0 +1,59 @@
+# Trial.MergeMessages(*TSuccess*, *TMessage*) Method 
+ 
+
+Appends the given messages with the messages in the given result.
+
+**Namespace:**&nbsp;<a href="N_RailwaySharp_ErrorHandling">RailwaySharp.ErrorHandling</a><br />**Assembly:**&nbsp;CommandLine (in CommandLine.dll) Version: 0.0.0
+
+## Syntax
+
+**C#**<br />
+``` C#
+public static Result<TSuccess, TMessage> MergeMessages<TSuccess, TMessage>(
+	IEnumerable<TMessage> messages,
+	Result<TSuccess, TMessage> result
+)
+
+```
+
+**VB**<br />
+``` VB
+Public Shared Function MergeMessages(Of TSuccess, TMessage) ( 
+	messages As IEnumerable(Of TMessage),
+	result As Result(Of TSuccess, TMessage)
+) As Result(Of TSuccess, TMessage)
+```
+
+**C++**<br />
+``` C++
+public:
+generic<typename TSuccess, typename TMessage>
+static Result<TSuccess, TMessage>^ MergeMessages(
+	IEnumerable<TMessage>^ messages, 
+	Result<TSuccess, TMessage>^ result
+)
+```
+
+**F#**<br />
+``` F#
+static member MergeMessages : 
+        messages : IEnumerable<'TMessage> * 
+        result : Result<'TSuccess, 'TMessage> -> Result<'TSuccess, 'TMessage> 
+
+```
+
+
+#### Parameters
+&nbsp;<dl><dt>messages</dt><dd>Type: <a href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1" target="_blank">System.Collections.Generic.IEnumerable</a>(*TMessage*)<br /></dd><dt>result</dt><dd>Type: <a href="T_RailwaySharp_ErrorHandling_Result_2">RailwaySharp.ErrorHandling.Result</a>(*TSuccess*, *TMessage*)<br /></dd></dl>
+
+#### Type Parameters
+&nbsp;<dl><dt>TSuccess</dt><dd /><dt>TMessage</dt><dd /></dl>
+
+#### Return Value
+Type: <a href="T_RailwaySharp_ErrorHandling_Result_2">Result</a>(*TSuccess*, *TMessage*)
+
+## See Also
+
+
+#### Reference
+<a href="T_RailwaySharp_ErrorHandling_Trial">Trial Class</a><br /><a href="N_RailwaySharp_ErrorHandling">RailwaySharp.ErrorHandling Namespace</a><br />
