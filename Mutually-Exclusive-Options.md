@@ -31,7 +31,7 @@ Group options in different set by defining the options class as follows:
 	}
 ```
 
-[Try it](https://dotnetfiddle.net/MkfPKX)
+[<img src="media/tryit.png">](https://dotnetfiddle.net/MkfPKX)
 
 In this way if you combine an ftp option with a web one, parsing will fail. Options in the SAME set can be combined together, but options cannot be combined across sets. For example, options in the ftp set can be combined, but when options from the web and ftp sets are used together, an incompatible options error is produced.
 
@@ -91,7 +91,7 @@ Follows behavior in the terminal.
 	}
 ```
 
-[Try it](https://dotnetfiddle.net/OkEgxC)
+[<img src="media/tryit.png">](https://dotnetfiddle.net/OkEgxC)
 
 **Migration of MutuallyExclusive options from v1.9.x guideline**
 
