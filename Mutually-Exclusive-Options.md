@@ -95,7 +95,7 @@ Follows behavior in the terminal.
 
 **Migration of MutuallyExclusive options from v1.9.x guideline**
 
- A demo in v1.9.71 , like this [demo](https://dotnetfiddle.net/OkEgxC), 
+ MutuallyExclusive options of the previous version 1.9.x, like this [demo](https://dotnetfiddle.net/OkEgxC), 
 can be  converted to v2.x as given below:
 
 - Remove the Parser configuration `(MutuallyExclusive = true)`, it's not available and Mutually Exclusive Options are available by default.
