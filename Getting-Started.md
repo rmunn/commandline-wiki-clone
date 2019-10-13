@@ -3,6 +3,17 @@ Firstly, install the package within the Package Manager in Visual Studio to down
 ```
 PM> Install-Package CommandLineParser
 ```
+You can use the next template for Console Project in VS 2017 or above:
+
+
+      <Project Sdk="Microsoft.NET.Sdk">
+         <PropertyGroup>
+            <TargetFramework>net461</TargetFramework>
+         </PropertyGroup>
+        <ItemGroup>  
+           <PackageReference Include="CommandLineParser" Version="2.6.0" />
+        </ItemGroup>
+      </Project>
 
 The Parser is activated from the `Parser` class, defined in the `CommandLine` namespace. I suggest that you use the pre-configured `Default` singleton, and only construct your own instance when really required.
 
@@ -13,6 +24,8 @@ namespace GetStartedSample
 {
 	static class Program
 	{
+       static void Main(string[] args)
+       {
 		// (1) default options
 		var result = Parser.Default.ParseArguments<Options>(args);
 
@@ -21,11 +34,14 @@ namespace GetStartedSample
 		var result = parser.ParseArguments<Options>(args);
 		
 		Console.WriteLine("Hello World.");
+      }
 	}
 }
 ```
 
 In the latter case the `Parser(Action<ParserSettings>)` constructor was called to configure the parser via the `ParserSettings` instance.
+
+For more information of ParserSettings, see [[API reference: ParserSettings|T_CommandLine_ParserSettings]]
 
 The `CommandLine.Text` namespace contains everything you need to create a user friendly help screen. This is done automatically if `ParserSettings.HelpWriter` is set.
 
@@ -79,6 +95,10 @@ class Options {
 }
 ```
 
+[<img src="media/tryit.png">](https://dotnetfiddle.net/ZBSD2B)
+
+For more information of ValueAttribe, see [[API reference: ValueAttribute|T_CommandLine_ValueAttribute]]
+
 ## [Option] Attribute
 
 If you Omit the option name the long name will be inferred from the member's name.
@@ -93,7 +113,7 @@ This allows:
 $ app --userid=root
 ```
 
-`Option` attribute also supports a `Separator` property to mimic the deprecated `OptionList` behavior when applied to sequences.
+`Option` attribute also supports a `Separator` property to mimic the deprecated `OptionList` behaviour when applied to sequences.
 ```csharp
 class Options {
   [Option('t', Separator=':')]
@@ -104,6 +124,10 @@ This allows:
 ```bash
 $ app -t int:long:string
 ```
+
+[<img src="media/tryit.png">](https://dotnetfiddle.net/qMRBhH)
+
+For more information of OptionAttribe, see [[API reference: OptionAttribute|T_CommandLine_OptionAttribute]]
 
 ## Capturing Sequences
 
@@ -142,10 +166,46 @@ var result = Parser.Default.ParseArguments<Options>(args)
 These methods accept a `System.Action` lambda, but if you prefer another approach, you can transform the parser result into any other value using `MapResult(...)` (and its overloads):
 ```csharp
 // you can directly turn the result into an exit code for example
-int Main(string[] args) {
+static int Main(string[] args) {
   return Parser.Default.ParseArguments<Options>(args)
     .MapResult(
       options => RunAndReturnExitCode(options),
       _ => 1);
 }
+ static int	RunAndReturnExitCode(Options options)
+	 {
+		 options.Dump();
+		 return 0;
+	 }
 ```
+
+`MapResult` provides a way to transform result data into another value and it can accept up to 16 parameter. Also `MapResult` can be used for async/await 
+
+For more than 16 type, there is a ParseArgument() overload that takes an array of Types.
+
+# Using MapResult in async/await
+
+```csharp
+ public class Program
+    {
+		public static async Task Main(string[] args)
+		{			
+                  
+		   var result = Parser.Default.ParseArguments<Options>(args);			
+	     var retCode=   await	result.MapResult(
+         async options => await RunAndReturnExitCodeAsync(options),
+         _ => Task.FromResult(1));
+			Console.WriteLine($"retCode={retCode}");
+		}  
+		
+		//async method
+	 static async Task<int>	RunAndReturnExitCodeAsync(Options options)
+	 {
+		 options.Dump();
+		 await Task.Delay(20);//simulate async method		
+		 return 0;
+	 }
+    }
+```
+
+[<img src="media/tryit.png">](https://dotnetfiddle.net/IvOG57)
