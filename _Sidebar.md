@@ -3,7 +3,9 @@
 - [[Getting Started]]
 - [[Mutually Exclusive Options]]
 - [[Verbs]]
-- [[Generating Help and Usage information]]
+- **HelpText**
+  - [[Generating Help and Usage information]]
+  - [[HelpText Configuration]]
 - [[Unparsing]]
 - [[Upgrading from previous v1.9]]
 - [[FAQ]]

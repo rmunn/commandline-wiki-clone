@@ -8,7 +8,10 @@ You can use the next template for Console Project in VS 2017 or above:
 
       <Project Sdk="Microsoft.NET.Sdk">
          <PropertyGroup>
+            <OutputType>Exe</OutputType>
             <TargetFramework>net461</TargetFramework>
+            <!-- in case you are using Assemplyinfo.cs -->
+	        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
          </PropertyGroup>
         <ItemGroup>  
            <PackageReference Include="CommandLineParser" Version="2.6.0" />
