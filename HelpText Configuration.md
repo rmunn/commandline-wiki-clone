@@ -87,7 +87,7 @@ HelpText can be configured using the following Properties and methods.
 |	AddPreOptionsText 	|Adds a text block of lines after copyright and before options usage strings.
  
   
-# Example: 1 #
+## Example: 1 ##
 
 To use custom help, disable auto generating help by configuring Parser.HelpWriter= null.
 Use `AutoBuild` method to build help.
@@ -154,7 +154,7 @@ ERROR(S):
   offset (pos. 0)    File offset.
 
 ```
-# Example: 2 #
+## Example: 2 ##
 Control displaying help, version and errors based on the type of error using the extension methods: `IsVersion() or IsHelp()`
 
 ```csharp
@@ -182,7 +182,7 @@ Control displaying help, version and errors based on the type of error using the
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/fMVNMC)
 
-# Example:3 #
+## Example:3 ##
 
 Adding dynamic contents computed at runtime.
 
@@ -229,6 +229,7 @@ windir=C:\Windows
 HelpText retrieve  AssemblyAttributes values to show header and copyright in help.
 The next AssemblyAttributes should be set:
 
+If you are using assemblyinfo.cs, add the following lines:
 
 ```csharp 
 [assembly: AssemblyTitle("Application Title")] 
@@ -236,8 +237,11 @@ The next AssemblyAttributes should be set:
 [assembly: AssemblyCopyright("Copyright")] 
 [assembly: AssemblyInformationalVersion("1.0.0-beta")]  
 ```
-Add these lines to the project file, just in PropertyGroup
-Modify the contents as your need.
+
+**An alternative method:**
+
+If you are not using assemblyinfo.cs, Add these lines to the project file, just in PropertyGroup
+
 
      <PropertyGroup>
        ....
@@ -249,10 +253,14 @@ Modify the contents as your need.
 	  
      </PropertyGroup>
   
-  The new SDK for msbuild is auto generating an AssemblyInfo file including the assemblyAttributes described before.
-  Note: This propertyGroup is the same in f# projects .fsproj or vb.net project .vbproj
+Modify the contents as your need.
+
+The new SDK for msbuild is auto generating an AssemblyInfo file during build including the assemblyAttributes described above.
+
+**Note:** This propertyGroup is the same in f# projects .fsproj or vb.net project .vbproj
   
- The version is retrieved from `AssemblyInformationalVersionAttribute`  or the `Assembly VersionAttribute` if the former is not defined.
+ The version is retrieved from `AssemblyInformationalVersionAttribute`  or the `AssemblyVersionAttribute` if the former is not defined.
+
 AssemblyInformationalVersionAttribute support [Semantic Versioning standard](https://semver.org/) like 1.0.0-beta, 1.0.0-beta.2, 1.0.0-beta.11,1.0.0-rc.1 and 1.0.0.
 
 HelpText use these attributes by default to generate the heading text and copyright text.

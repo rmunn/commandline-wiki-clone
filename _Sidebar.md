@@ -7,6 +7,7 @@
   - [[Generating Help and Usage information]]
   - [[HelpText Configuration]]
 - [[Unparsing]]
+- [[How To]]
 - [[Upgrading from previous v1.9]]
 - [[FAQ]]
 - [CommandLineParser API V2.6.0](API-V2.6.0)
