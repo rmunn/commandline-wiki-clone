@@ -43,7 +43,7 @@ It's composed of the following sections:
   
   
 
-- **Copyright**: is formated as
+- **Copyright**: is formatted as
 
        Copyright (C) `<year> <Company>`
 
@@ -57,9 +57,9 @@ It's composed of the following sections:
 
 - Options_section: series of  `< Shortname, longName>` with its help.
 
-- Pre_options: is optinal block before options.
+- Pre_options: is optional block before options.
 
-- Post_options: is optinal block after options.
+- Post_options: is optional block after options.
 
 
 # HelpText Setting #
@@ -90,7 +90,7 @@ HelpText can be configured using the following Properties and methods.
 # Example: 1 #
 
 To use custom help, disable auto generating help by configuring Parser.HelpWriter= null.
-Use AutoBuild method to build help.
+Use `AutoBuild` method to build help.
 
 This example configure HelpText with `AdditionalNewLineAfterOption`
 ```csharp

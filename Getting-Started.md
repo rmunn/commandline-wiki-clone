@@ -212,3 +212,14 @@ For more than 16 type, there is a ParseArgument() overload that takes an array o
 ```
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/IvOG57)
+
+## Template Project
+
+You can start using CommandLineParser library by downloading your preferred language project.
+ 
+
+Download [C# project](./resources/Demo.CS.zip) Template.
+
+Download [VB.NET project](./resources/Demo.VB.zip) Template.
+
+Download [F# project](./resources/Demo.FS.zip) Template.
