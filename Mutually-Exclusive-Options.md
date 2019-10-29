@@ -10,25 +10,25 @@ Group options in different set by defining the options class as follows:
 
 ```csharp
 
-	class OptionsMutuallyExclusive
-	{
-	  //define commands in set(group) named web
-	  [Option(SetName = "web")]
-	  public string DocumentRoot { get; set; }
-	   [Option(SetName  = "web")]
-	  public bool EnableJavaScript { get; set; } 
-	  
-	  //define other commands in set(group) named ftp
-	  [Option(SetName  = "ftp")]
-	  public string FtpDirectory { get; set; } 
-	  [Option(SetName  = "ftp")]
-	  public bool AnonymousLogin { get; set; }
-	  
-	 
-	  //Common: the next option can be used with any set because it's not included in a set
-	  [Option('r')]
-	  public string UrlAddress { get; set; }
-	}
+class OptionsMutuallyExclusive
+{
+  //define commands in set(group) named web
+  [Option(SetName = "web")]
+  public string DocumentRoot { get; set; }
+  [Option(SetName  = "web")]
+  public bool EnableJavaScript { get; set; } 
+  
+  //define other commands in set(group) named ftp
+  [Option(SetName  = "ftp")]
+  public string FtpDirectory { get; set; } 
+  [Option(SetName  = "ftp")]
+  public bool AnonymousLogin { get; set; }
+  
+ 
+  //Common: the next option can be used with any set because it's not included in a set
+  [Option('r')]
+  public string UrlAddress { get; set; }
+}
 ```
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/GeXOFY)
@@ -55,40 +55,40 @@ Follows behavior in the terminal.
 
 ```csharp
 
-	//define commands in set 'web'
-	interface IWebOptions
-    {
-       
-      [Option(SetName = "web")]
-      string DocumentRoot { get; set; }
-     [Option(SetName  = "web")]
-      bool EnableJavaScript { get; set; } 
-    }
+//define commands in set 'web'
+interface IWebOptions
+{
+   
+  [Option(SetName = "web")]
+  string DocumentRoot { get; set; }
+  [Option(SetName  = "web")]
+  bool EnableJavaScript { get; set; } 
+}
 
-	//define commands in set 'ftp'
-	interface IFtpOptions
-    {
+//define commands in set 'ftp'
+interface IFtpOptions
+{
+  [Option(SetName  = "ftp")]
+  string FtpDirectory { get; set; } 
+  [Option(SetName  = "ftp")]
+  bool AnonymousLogin { get; set; }
+}
 
-	  [Option(SetName  = "ftp")]
-	  string FtpDirectory { get; set; } 
-	  [Option(SetName  = "ftp")]
-	  bool AnonymousLogin { get; set; }
-    }
+public class OptionsMutuallyExclusive : IWebOptions, IFtpOptions
+{  
+  //Implement commands in set(group) named web	
+  public string DocumentRoot { get; set; }	  
+  public bool EnableJavaScript { get; set; } 
+  
+  //Implement other commands in set(group) named ftp	
+  public string FtpDirectory { get; set; } 	 
+  public bool AnonymousLogin { get; set; }
 
-	public class OptionsMutuallyExclusive : IWebOptions, IFtpOptions
-	{  
-	  //Implement commands in set(group) named web	
-	  public string DocumentRoot { get; set; }	  
-	  public bool EnableJavaScript { get; set; } 
-	  
-	  //Implement other commands in set(group) named ftp	
-	  public string FtpDirectory { get; set; } 	 
-	  public bool AnonymousLogin { get; set; }
+  //Common option, can be used with any set because it's not included in a set
+  [Option('r')]
+  public string UrlAddress { get; set; }
+}
 
-	  //Common option, can be used with any set because it's not included in a set
-	  [Option('r')]
-	  public string UrlAddress { get; set; }
-	}
 ```
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/uUIfCb)

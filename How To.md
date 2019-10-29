@@ -7,22 +7,22 @@ Use custom help and configure `HelText: AutoHelp=false and AutoVersion=false`
 
 ```csharp
 
-	void Main(string[] args)
-	{
-		var parser = new CommandLine.Parser(with=>with.HelpWriter=null); 
-		var parserResult = parser.ParseArguments<Options>(args);	
-		parserResult.WithParsed<Options>(opt=>opt.Dump())
-					.WithNotParsed(x=> 
-					{		
-	           var helpText=  HelpText.AutoBuild(parserResult, h =>
-	           {
-	               h.AutoHelp=false; //hide --help
-	               h.AutoVersion=false;	 //hide --version	
-	              return HelpText.DefaultParsingErrorsHandler(parserResult, h);
-	           } , e=>e);	
-					  Console.WriteLine(helpText);			  
-				  });
-	}
+void Main(string[] args)
+{
+    var parser = new Parser(with => with.HelpWriter = null);
+    var parserResult = parser.ParseArguments<Options>(args);
+    parserResult.WithParsed(opt => opt.Dump())
+        .WithNotParsed(x =>
+        {
+            var helpText = HelpText.AutoBuild(parserResult, h =>
+            {
+                h.AutoHelp = false;     //hide --help
+                h.AutoVersion = false;  //hide --version	
+                return HelpText.DefaultParsingErrorsHandler(parserResult, h);
+            }, e => e);
+            Console.WriteLine(helpText);
+        });
+}
 
 ```
 
@@ -43,11 +43,12 @@ or
 
 
 ```csharp
-  var helpText=  HelpText.AutoBuild(parserResult, h =>
-	           {
-	               h.AddPostOptionsText(dynamic_data);	              	
-	              return HelpText.DefaultParsingErrorsHandler(parserResult, h);
-	           } , e=>e);
+var helpText = HelpText.AutoBuild(parserResult, h =>
+		           {
+		               h.AddPostOptionsText(dynamic_data);	              	
+		               return HelpText.DefaultParsingErrorsHandler(parserResult, h);
+		           }, e=>e);
+
 ```
 
 ----------

@@ -5,18 +5,19 @@ PM> Install-Package CommandLineParser
 ```
 You can use the next template for Console Project in VS 2017 or above:
 
-
-      <Project Sdk="Microsoft.NET.Sdk">
-         <PropertyGroup>
-            <OutputType>Exe</OutputType>
-            <TargetFramework>net461</TargetFramework>
-            <!-- in case you are using Assemplyinfo.cs -->
+```
+<Project Sdk="Microsoft.NET.Sdk">
+	 <PropertyGroup>
+	        <OutputType>Exe</OutputType>
+	        <TargetFramework>net461</TargetFramework>
+	        <!-- in case you are using Assemplyinfo.cs -->
 	        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-         </PropertyGroup>
-        <ItemGroup>  
-           <PackageReference Include="CommandLineParser" Version="2.6.0" />
-        </ItemGroup>
-      </Project>
+	 </PropertyGroup>
+	 <ItemGroup>  
+	       <PackageReference Include="CommandLineParser" Version="2.6.0" />
+	 </ItemGroup>
+</Project>
+```
 
 The Parser is activated from the `Parser` class, defined in the `CommandLine` namespace. I suggest that you use the pre-configured `Default` singleton, and only construct your own instance when really required.
 
