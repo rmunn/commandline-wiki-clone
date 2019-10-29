@@ -22,25 +22,27 @@ You can use the next template for Console Project in VS 2017 or above:
 The Parser is activated from the `Parser` class, defined in the `CommandLine` namespace. I suggest that you use the pre-configured `Default` singleton, and only construct your own instance when really required.
 
 ```csharp
+
 using CommandLine;
 
 namespace GetStartedSample 
 {
 	static class Program
 	{
-       static void Main(string[] args)
-       {
-		// (1) default options
-		var result = Parser.Default.ParseArguments<Options>(args);
-
-		// or (2) build and configure instance
-		var parser = new Parser(with => with.EnableDashDash = true);
-		var result = parser.ParseArguments<Options>(args);
-		
-		Console.WriteLine("Hello World.");
-      }
+	       static void Main(string[] args)
+	       {
+			// (1) default options
+			var result = Parser.Default.ParseArguments<Options>(args);
+	
+			// or (2) build and configure instance
+			var parser = new Parser(with => with.EnableDashDash = true);
+			var result = parser.ParseArguments<Options>(args);
+			
+			Console.WriteLine("Hello World.");
+	      }
 	}
 }
+
 ```
 
 In the latter case the `Parser(Action<ParserSettings>)` constructor was called to configure the parser via the `ParserSettings` instance.
@@ -161,26 +163,32 @@ Even though it's possible to examine the `Errors` sequence, it's recommended to 
 This hierarchy is modeled like an **F#** discriminated union. You can check the property `Tag` to see which derived type you received, no need for casting.
 
 Two convenient extension methods are provided to help you access values:
+## Method 1 
+
 ```csharp
 var result = Parser.Default.ParseArguments<Options>(args)
   .WithParsed(options => ...) // options is an instance of Options type
   .WithNotParsed(errors => ...) // errors is a sequence of type IEnumerable<Error>
 ```
 
-These methods accept a `System.Action` lambda, but if you prefer another approach, you can transform the parser result into any other value using `MapResult(...)` (and its overloads):
+These methods accept a `System.Action` lambda, but if you prefer another approach, you can transform the parser result into any other value using `MapResult(...)` (and its overloads)
+## Method 2 
+
 ```csharp
 // you can directly turn the result into an exit code for example
-static int Main(string[] args) {
-  return Parser.Default.ParseArguments<Options>(args)
-    .MapResult(
-      options => RunAndReturnExitCode(options),
-      _ => 1);
+static int Main(string[] args) 
+{
+    return Parser.Default.ParseArguments<Options>(args)
+	    .MapResult(
+	      options => RunAndReturnExitCode(options),
+	      _ => 1);
 }
- static int	RunAndReturnExitCode(Options options)
-	 {
-		 options.Dump();
-		 return 0;
-	 }
+
+static int RunAndReturnExitCode(Options options)
+{
+	 options.Dump();
+	 return 0;
+}
 ```
 
 `MapResult` provides a way to transform result data into another value and it can accept up to 16 parameter. Also `MapResult` can be used for async/await 
@@ -190,26 +198,28 @@ For more than 16 type, there is a ParseArgument() overload that takes an array o
 # Using MapResult in async/await
 
 ```csharp
+
  public class Program
-    {
-		public static async Task Main(string[] args)
-		{			
-                  
-		   var result = Parser.Default.ParseArguments<Options>(args);			
-	     var retCode=   await	result.MapResult(
-         async options => await RunAndReturnExitCodeAsync(options),
-         _ => Task.FromResult(1));
+ {
+	public static async Task Main(string[] args)
+	{			
+	          
+		 var result = Parser.Default.ParseArguments<Options>(args);			
+		 var retCode=   await	result.MapResult(
+		 async options => await RunAndReturnExitCodeAsync(options),
+		 _ => Task.FromResult(1));
 			Console.WriteLine($"retCode={retCode}");
-		}  
+	}  
 		
-		//async method
-	 static async Task<int>	RunAndReturnExitCodeAsync(Options options)
-	 {
+	//async method
+	static async Task<int>	RunAndReturnExitCodeAsync(Options options)
+	{
 		 options.Dump();
 		 await Task.Delay(20);//simulate async method		
 		 return 0;
-	 }
-    }
+	}
+ }
+
 ```
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/IvOG57)
@@ -224,3 +234,6 @@ Download [C# project](./resources/Demo.CS.zip) Template.
 Download [VB.NET project](./resources/Demo.VB.zip) Template.
 
 Download [F# project](./resources/Demo.FS.zip) Template.
+
+# See also #
+- [[Verbs]]

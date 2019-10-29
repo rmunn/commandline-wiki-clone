@@ -10,4 +10,5 @@
 - [[How To]]
 - [[Upgrading from previous v1.9]]
 - [[FAQ]]
+- [[Resources]]
 - [CommandLineParser API V2.6.0](API-V2.6.0)
