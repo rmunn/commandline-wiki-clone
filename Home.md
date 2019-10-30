@@ -1,13 +1,12 @@
 Version 2 is currently released as [![NuGet](https://img.shields.io/nuget/v/CommandLineParser.svg)](https://nuget.org/packages/CommandLineParser)
 
-
-
 # Overview
+
 - No dependencies! The standard `CommandLineParser` package has no dependencies.  If you want FSharp support, you should reference the `CommandLineParser.FSharp` package.
 - [[Getting Started]] will show you how to get started with step-by-step instructions
 - [[Mutually Exclusive Options]] will show you how to get use Mutually Exclusive Options.
 - [[Verbs]] page shows you how to construct verbs like the popular git command.
-- [[Generating Help and Usage information]] The library by default will automatically generate help and usage information for you.  
+- [[Generating Help and Usage information]] The library by default will automatically generate help and usage information for you.
 - [[Unparsing]] You can transform back a parsed instance or a freshly created one into a string with command line arguments.
 
 ## Immutable Options Type
@@ -15,6 +14,7 @@ Version 2 is currently released as [![NuGet](https://img.shields.io/nuget/v/Comm
 If you develop according to functional programming, you probably won't define a mutable type like the ones presented in samples.
 
 You're free to define an immutable type:
+
 ```csharp
 class Options {
   private readonly IEnumerable<string> files;
@@ -41,6 +41,7 @@ class Options {
 The parser will detect this class as immutable by the absence of public property setters and fields.
 
 This is the same feature that allow you to parse against an **F#** record:
+
 ```fsharp
 type options = {
   [<Option>] files : seq<string>;
@@ -55,37 +56,37 @@ As you can see the `options.offset` record member was defined as `option<int64>`
 
 The properties of the `Options` class should be public. Internal properties are not updated by the Parser.
 
-
 ## Help Screen
 
-One of strengths of this library lies in the ability to automatically generate a help screen for the end user. See the [[Generating Help and Usage information]] page for more information. 
-
+One of strengths of this library lies in the ability to automatically generate a help screen for the end user. See the [[Generating Help and Usage information]] page for more information.
 
 ## [Usage] Attribute
 
-The `Usage` attribute is a new **2.0.x** feature that allows you to add a properly formatted `USAGE:` section to your help screen. One or more usage examples can be defined, by providing a static `IEnumerable<Example>` property annotated with the `[Usage]` attribute. 
+The `Usage` attribute is a new **2.0.x** feature that allows you to add a properly formatted `USAGE:` section to your help screen. One or more usage examples can be defined, by providing a static `IEnumerable<Example>` property annotated with the `[Usage]` attribute.
 
 ```csharp
 using CommandLine.Text;
 
 class Options
 {
-    [Option("filename", Required = false, HelpText = "Input filename.")]
-    public string filename { get; set; }
+  [Option("filename", Required = false, HelpText = "Input filename.")]
+  public string filename { get; set; }
 
-    [Usage(ApplicationAlias = "yourapp")]
-    public static IEnumerable<Example> Examples
+  [Usage(ApplicationAlias = "yourapp")]
+  public static IEnumerable<Example> Examples
+  {
+    get
     {
-        get
-        {
-            return new List<Example>() {
-                new Example("Convert file to a trendy format", new Options { filename = "file.bin" })
-            };
-        }
+      return new List<Example>() {
+        new Example("Convert file to a trendy format", new Options { filename = "file.bin" })
+      };
     }
+  }
 }
 ```
+
 Will produce the following help text:
+
 ```bash
 yourapp 2.0.201-alpha
 Copyright (c) 2005 - 2015 Giacomo Stelluti Scala
@@ -100,17 +101,20 @@ yourapp --filename file.bin
   --version     Display version information.
   ```
 
-More than one usage can be defined. It is also possible to format the displayed usage by providing a list of `UnParserSettings`. 
+More than one usage can be defined. It is also possible to format the displayed usage by providing a list of `UnParserSettings`.
 
-```csharp
-class Options {
+```cs
+class Options
+{
   // Normal options here.
 
   [Usage(ApplicationAlias = "yourapp")]
-  public static IEnumerable<Example> Examples {
-    get {
+  public static IEnumerable<Example> Examples
+  {
+    get
+    {
       yield return new Example("Normal scenario", new Options { InputFile = "file.bin", OutputFile = "out.bin" });
-      yield return new Example("Logging warnings", UnParserSettings.WithGroupSwitchesOnly() , new Options { InputFile = "file.bin", LogWarning = true });
+      yield return new Example("Logging warnings", UnParserSettings.WithGroupSwitchesOnly(), new Options { InputFile = "file.bin", LogWarning = true });
       yield return new Example("Logging errors", new[] { UnParserSettings.WithGroupSwitchesOnly(), UnParserSettings.WithUseEqualTokenOnly() }, new Options { InputFile = "file.bin", LogError = true });
     }
   }
@@ -124,12 +128,11 @@ When working with formatting styles, the important thing to know is that `UnPars
 If you're an experienced command line user, you're wondering how `AutoBuild()` will handle this data when you define `AssemblyUsage` attribute. It will follows the rules above:
 
 1. Prints header (`SentenceBuilder.UsageHadingText`) if you've used `Usage` or `AssemblyUsage` attribute and such header isn't an empty string (default `USAGE:`).
-
-2. Prints content provided by `AssemblyUsage` if defined.
-
-3. Prints content provided by `Usage` if defined.
+1. Prints content provided by `AssemblyUsage` if defined.
+1. Prints content provided by `Usage` if defined.
 
 The above output is taken from a unit test.
+
 ```bash
 yourapp 2.0.201-alpha
 Copyright (c) 2005 - 2015 Giacomo Stelluti Scala
@@ -143,9 +146,7 @@ Cloning quietly:
 Cloning without hard links:
   git clone --no-hardlinks https://github.com/gsscoder/csharpx
 
-
-  --no-hardlinks    Optimize the cloning process from a repository on a local 
-                    filesystem by copying files.
+  --no-hardlinks    Optimize the cloning process from a repository on a local filesystem by copying files.
 
   -q, --quiet       Suppress summary message.
 
@@ -157,6 +158,7 @@ Cloning without hard links:
 ```
 
 If you build `HelpText` instance by your own, you can rely on three methods to gather `Usage` attribute data:
+
 ```csharp
 static string RenderUsageText<T>(ParserResult<T> parserResult)
 static string RenderUsageText<T>(ParserResult<T> parserResult, Func<Example, Example> mapperFunc)

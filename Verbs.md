@@ -19,6 +19,7 @@ class CloneOptions { //normal options here
 ```
 
 A this point you have to use a proper `ParserArguments<T1, T2...>` overload that accepts more than one type (without using the overload with variadic arguments, the library defines versions with up to 16 type parameters):
+
 ```csharp
 static int Main(string[] args) {
     var result = Parser.Default.ParseArguments<AddOptions, CommitOptions, CloneOptions>(args);
@@ -30,6 +31,7 @@ In this case the `T Value` property of `ParserResult<T>` will be `object` but wi
 The only change with normal parsing is the requirement to query the `Parsed<object>.Value` property and invoke the application logic written to handle a specific verb.
 
 A helper extension method is provided to simplify this task:
+
 ```csharp
 static int Main(string[] args) {
     Parser.Default.ParseArguments<AddOptions, CommitOptions, CloneOptions>(args)
@@ -41,6 +43,7 @@ static int Main(string[] args) {
 ```
 
 Coherently with `ParseArguments<T1, T2, ...>()` overloads used for verbs, you can take advantage also of `MapResult<T1, T2, ...>()`. Like in the sample with a single target instance, here we turn the parsed verb into an exit code:
+
 ```csharp
 static int Main(string[] args) {
   return Parser.Default.ParseArguments<AddOptions, CommitOptions, CloneOptions>(args)

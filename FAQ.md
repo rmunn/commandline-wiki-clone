@@ -1,4 +1,5 @@
-#FAQ
+# FAQ
+
 Frequently asked questions
 
 ## Can I see it in action?

@@ -3,46 +3,43 @@ Firstly, install the package within the Package Manager in Visual Studio to down
 ```
 PM> Install-Package CommandLineParser
 ```
+
 You can use the next template for Console Project in VS 2017 or above:
 
-```
+```xml
 <Project Sdk="Microsoft.NET.Sdk">
-	 <PropertyGroup>
-	        <OutputType>Exe</OutputType>
-	        <TargetFramework>net461</TargetFramework>
-	        <!-- in case you are using Assemplyinfo.cs -->
-	        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	 </PropertyGroup>
-	 <ItemGroup>  
-	       <PackageReference Include="CommandLineParser" Version="2.6.0" />
-	 </ItemGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net461</TargetFramework>
+    <!-- in case you are using Assemplyinfo.cs -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+  </ItemGroup>
 </Project>
 ```
 
-The Parser is activated from the `Parser` class, defined in the `CommandLine` namespace. I suggest that you use the pre-configured `Default` singleton, and only construct your own instance when really required.
+The parser is activated from the `Parser` class, defined in the `CommandLine` namespace. I suggest that you use the pre-configured `Default` singleton, and only construct your own instance when really required.
 
 ```csharp
-
 using CommandLine;
 
-namespace GetStartedSample 
+namespace GetStartedSample
 {
-	static class Program
-	{
-	       static void Main(string[] args)
-	       {
-			// (1) default options
-			var result = Parser.Default.ParseArguments<Options>(args);
-	
-			// or (2) build and configure instance
-			var parser = new Parser(with => with.EnableDashDash = true);
-			var result = parser.ParseArguments<Options>(args);
-			
-			Console.WriteLine("Hello World.");
-	      }
-	}
+  static class Program
+  {
+    static void Main(string[] args)
+    {
+      // (1) default options
+      var result = Parser.Default.ParseArguments<Options>(args);
+      // or (2) build and configure instance
+      var parser = new Parser(with => with.EnableDashDash = true);
+      var result = parser.ParseArguments<Options>(args);
+      Console.WriteLine("Hello World.");
+    }
+  }
 }
-
 ```
 
 In the latter case the `Parser(Action<ParserSettings>)` constructor was called to configure the parser via the `ParserSettings` instance.
@@ -54,8 +51,9 @@ The `CommandLine.Text` namespace contains everything you need to create a user f
 The default instance `Parser.Default` initializes with `ParserSettings.HelpWriter` set to `Console.Error`.
 
 These features are optional.
- 
+
 # Parsed Options and Value
+
 Version 2 uses only two attributes to describe option syntax: `Option` and `Value`·
 
 `Option` works much like in previous versions, but it can be applied to scalar or sequence values (`IEnumerable<T>`).
@@ -67,6 +65,7 @@ When applied to sequences you can also define `Min` and `Max` properties to spec
 ## [Value] Attribute
 
 Values are partitioned by index. For example:
+
 ```csharp
 class Options {
   [Value(0)]
@@ -81,11 +80,13 @@ class Options {
 ```
 
 So long as you supply values, they will be set to corresponding properties:
+
 ```bash
 $ app 10 str1 str2 str3 1.1
 ```
 
 If you omit `Min` and `Max` constraints, all available values will be captured by the sequence. There's no point defining a `Value` attribute with a higher index than that of a sequence `Value` which lacks a **Max** range constraint:
+
 ```csharp
 class Options {
   [Value(0)]
@@ -108,25 +109,31 @@ For more information of ValueAttribe, see [[API reference: ValueAttribute|T_Comm
 ## [Option] Attribute
 
 If you Omit the option name the long name will be inferred from the member's name.
+
 ```csharp
 class Options {
   [Option]
   public string UserId { get; set; }
 }
 ```
+
 This allows:
+
 ```bash
 $ app --userid=root
 ```
 
 `Option` attribute also supports a `Separator` property to mimic the deprecated `OptionList` behaviour when applied to sequences.
+
 ```csharp
 class Options {
   [Option('t', Separator=':')]
   public IEnumerable<string> Types { get; set; }
 }
 ```
+
 This allows:
+
 ```bash
 $ app -t int:long:string
 ```
@@ -141,11 +148,12 @@ As mentioned above, you can apply both new attributes to `IEnumerable<T>` (where
 
 You can also specify a `Min` constraint or a `Max` constraint alone: this means you only want check for minimum or maximum number of elements. Breaking a constraint will cause parsing to fail.
 
-You could overlay `Min=1` with `Required=true` but there's no point in doing so because the parser will check `Required` before the `Min` constraint. In this case you should favour `Min=1` whilst `Min=1, Max=1` should be avoided (even though they will behave as expected) in favour of `Required=true`. 
+You could overlay `Min=1` with `Required=true` but there's no point in doing so because the parser will check `Required` before the `Min` constraint. In this case you should favour `Min=1` whilst `Min=1, Max=1` should be avoided (even though they will behave as expected) in favour of `Required=true`.
 
 # Parsing
 
 Parsing is a single liner:
+
 ```csharp
 var result = Parser.Default.ParseArguments<Options>(args);
 ```
@@ -163,7 +171,8 @@ Even though it's possible to examine the `Errors` sequence, it's recommended to 
 This hierarchy is modeled like an **F#** discriminated union. You can check the property `Tag` to see which derived type you received, no need for casting.
 
 Two convenient extension methods are provided to help you access values:
-## Method 1 
+
+## Method 1
 
 ```csharp
 var result = Parser.Default.ParseArguments<Options>(args)
@@ -172,62 +181,57 @@ var result = Parser.Default.ParseArguments<Options>(args)
 ```
 
 These methods accept a `System.Action` lambda, but if you prefer another approach, you can transform the parser result into any other value using `MapResult(...)` (and its overloads)
-## Method 2 
+
+## Method 2
 
 ```csharp
 // you can directly turn the result into an exit code for example
-static int Main(string[] args) 
+static int Main(string[] args)
 {
-    return Parser.Default.ParseArguments<Options>(args)
-	    .MapResult(
-	      options => RunAndReturnExitCode(options),
-	      _ => 1);
+  return Parser.Default.ParseArguments<Options>(args)
+  .MapResult(
+    options => RunAndReturnExitCode(options),
+    _ => 1);
 }
 
 static int RunAndReturnExitCode(Options options)
 {
-	 options.Dump();
-	 return 0;
+   options.Dump();
+   return 0;
 }
 ```
 
-`MapResult` provides a way to transform result data into another value and it can accept up to 16 parameter. Also `MapResult` can be used for async/await 
+`MapResult` provides a way to transform result data into another value and it can accept up to 16 parameter. Also `MapResult` can be used for async/await.
 
 For more than 16 type, there is a ParseArgument() overload that takes an array of Types.
 
 # Using MapResult in async/await
 
 ```csharp
+public class Program
+{
+  public static async Task Main(string[] args)
+  {
+    var result = Parser.Default.ParseArguments<Options>(args);
+    var retCode = await result.MapResult(async options => await RunAndReturnExitCodeAsync(options), _ => Task.FromResult(1));
+    Console.WriteLine($"retCode={retCode}");
+  }
 
- public class Program
- {
-	public static async Task Main(string[] args)
-	{			
-	          
-		 var result = Parser.Default.ParseArguments<Options>(args);			
-		 var retCode=   await	result.MapResult(
-		 async options => await RunAndReturnExitCodeAsync(options),
-		 _ => Task.FromResult(1));
-			Console.WriteLine($"retCode={retCode}");
-	}  
-		
-	//async method
-	static async Task<int>	RunAndReturnExitCodeAsync(Options options)
-	{
-		 options.Dump();
-		 await Task.Delay(20);//simulate async method		
-		 return 0;
-	}
- }
-
+  //async method
+  static async Task<int> RunAndReturnExitCodeAsync(Options options)
+  {
+    options.Dump();
+    await Task.Delay(20); //simulate async method
+    return 0;
+  }
+}
 ```
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/IvOG57)
 
-## Project Template 
+## Project Template
 
 You can start using CommandLineParser library by downloading your preferred language project.
- 
 
 Download [C# project](./resources/Demo.CS.zip) Template.
 
@@ -235,5 +239,6 @@ Download [VB.NET project](./resources/Demo.VB.zip) Template.
 
 Download [F# project](./resources/Demo.FS.zip) Template.
 
-# See also #
+# See also
+
 - [[Verbs]]

@@ -25,11 +25,13 @@ class Options {
 ```
 
 So long as you supply values, they will be set to corresponding properties:
+
 ```bash
 $ app 10 str1 str2 str3 1.1
 ```
 
 If you omit `Min` and `Max` constraints, all available values will be captured by the sequence. There's no point defining a `Value` attribute with a higher index than that of a sequence `Value` which lacks a **Max** range constraint:
+
 ```csharp
 class Options {
   [Value(0)]
@@ -48,25 +50,31 @@ class Options {
 ## [Option] Attribute
 
 If you Omit the option name the long name will be inferred from the member's name.
+
 ```csharp
 class Options {
   [Option]
   public string UserId { get; set; }
 }
 ```
+
 This allows:
+
 ```bash
 $ app --userid=root
 ```
 
 `Option` attribute also supports a `Separator` property to mimic the deprecated `OptionList` behavior when applied to sequences.
+
 ```csharp
 class Options {
   [Option('t', Separator=':')]
   public IEnumerable<string> Types { get; set; }
 }
 ```
+
 This allows:
+
 ```bash
 $ app -t int:long:string
 ```
