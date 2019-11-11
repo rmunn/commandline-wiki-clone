@@ -107,6 +107,9 @@ Code Example
  }
 
 ```
+
+---------------
+
 ## Q5
 
 **How to define Help Text for positional arguments?**
@@ -151,3 +154,133 @@ Copyright (C) 2019 ConsoleApp
 This is applied also to the Named Options.
 
 For more details of the `MetaName` and `MetaValue`, see [[API documentation|T_CommandLine_ValueAttribute#properties]]
+
+---------
+
+## Q6
+
+**How to Print Help Screen when the Parser Success from within `WithParsed` Method?**
+
+**Answer:**
+
+- Declare `parserResult`
+
+```cs
+static ParserResult<Options> parserResult ;
+```
+
+- Pass `ParserResult` to the following method to generate the Help Text:
+
+```cs
+    // Use default configuration
+		// You can customize HelpText and pass different configuratins
+		//See wiki
+		// https://github.com/commandlineparser/commandline/wiki/How-To#q1
+		// https://github.com/commandlineparser/commandline/wiki/HelpText-Configuration
+    
+static string GetHelp<T>(ParserResult<T> parserResult )
+	{
+	   	return  HelpText.AutoBuild(parserResult, h =>h,e=>e);
+	}
+```
+
+- Call `GetHelp` from  `WithParsed` method
+
+<details>
+<summary> Complete Code Example- Click to Expand</summary>
+<p>
+
+```c#
+
+using System;
+using System.Collections.Generic;
+using CommandLine;
+using CommandLine.Text;
+
+//Print Help Screen when Parser success
+public class Program
+{
+	static ParserResult<Options> parserResult;
+	public static void Main()
+	{
+		string[] args = new[]{"--stdin", "123"};
+		Console.WriteLine("Call help screen when Parser success");
+		var parser = new CommandLine.Parser(with => with.HelpWriter = null);
+		parserResult = Parser.Default.ParseArguments<Options>(args);
+		parserResult.WithParsed(Run).WithNotParsed(errs => HandleErrors(errs));
+	}
+
+	static void HandleErrors(IEnumerable<Error> errs)
+	{
+		Console.WriteLine("Parser Fail");
+	}
+
+	private static void Run(Options options)
+	{
+		Console.WriteLine("parser SUCCESS");
+		if (!validate(options))
+		{
+			Console.WriteLine("Validation fail");
+			var helpText = GetHelp<Options>(parserResult);
+			Console.WriteLine(helpText);
+		}
+	}
+
+	//Generate Help text
+	static string GetHelp<T>(ParserResult<T> result)
+	{
+		// use default configuration
+		// you can customize HelpText and pass different configuratins
+		//see wiki
+		// https://github.com/commandlineparser/commandline/wiki/How-To#q1
+		// https://github.com/commandlineparser/commandline/wiki/HelpText-Configuration
+		return HelpText.AutoBuild(result, h => h, e => e);
+	}
+
+	//validate options
+	static bool validate(Options options)
+	{
+		// do validation 
+		if (options.FileName == null)
+			return false;
+		return true;
+	}
+}
+
+class Options
+{
+	[Option(Default = false, HelpText = "Prints all messages to standard output.")]
+	public bool Verbose
+	{
+		get;
+		set;
+	}
+
+	[Option("stdin", Default = false, HelpText = "Read from stdin")]
+	public bool stdin
+	{
+		get;
+		set;
+	}
+
+	[Option("file", HelpText = "File name")]
+	public string FileName
+	{
+		get;
+		set;
+	}
+
+	[Value(0, MetaName = "offset", HelpText = "File offset.")]
+	public long? Offset
+	{
+		get;
+		set;
+	}
+}
+```
+
+</p>
+</details>  
+
+[<img src="media/tryit.png">](https://dotnetfiddle.net/ovpkf1)
+
