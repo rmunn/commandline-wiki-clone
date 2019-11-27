@@ -2,6 +2,7 @@
 
 - [[Home]]
 - [[Getting Started]]
+- [[Immutable Options Type]]
 - [[Mutually Exclusive Options]]
 - [[Verbs]]
 - **HelpText**
