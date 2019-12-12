@@ -4,6 +4,7 @@
 - [[Getting Started]]
 - [[Immutable Options Type]]
 - [[Mutually Exclusive Options]]
+- [[Option Groups]]
 - [[Verbs]]
 - **HelpText**
   - [[Generating Help and Usage information]]
