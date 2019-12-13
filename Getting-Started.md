@@ -212,9 +212,12 @@ public class Program
 {
   public static async Task Main(string[] args)
   {
-    var result = Parser.Default.ParseArguments<Options>(args);
-    var retCode = await result.MapResult(async options => await RunAndReturnExitCodeAsync(options), _ => Task.FromResult(1));
-    Console.WriteLine($"retCode={retCode}");
+    var result = Parser.Default.ParseArguments<Options>(args)
+     .MapResult(async options => await RunAndReturnExitCodeAsync(options), _ => Task.FromResult(1));
+    //or more simpler using Method group
+    // .MapResult(RunAndReturnExitCodeAsync), _ => Task.FromResult(1));
+    Console.WriteLine($"retCode={result.Result}");
+    return Task.CompletedTask;
   }
 
   //async method
@@ -228,6 +231,31 @@ public class Program
 ```
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/IvOG57)
+
+
+# Using WithParsed in async/await
+
+```csharp
+public class Program
+{
+  public static async Task Main(string[] args)
+  {
+    var result = Parser.Default.ParseArguments<Options>(args)
+               .WithParsed(async options => await RunAsync(options));
+    
+  }
+
+  //async method
+  static async Task RunAsync(Options options)
+  {
+    options.Dump();
+    await Task.Delay(20); //simulate async method    
+  }
+}
+```
+
+[<img src="media/tryit.png">](https://dotnetfiddle.net/jRmtG1)
+
 
 ## Project Template
 
