@@ -59,3 +59,41 @@ Example:
 ```csharp
 var arguments = CommandLine.Parser.Default.FormatCommandLine(options, config => config.GroupSwitches = true);
 ```
+
+## Skipping options with default values
+When you have many command line parameters with default values in most of them you can  shorten the generated arguments.
+This can be done by setting the configuration option `SkipDefault` to true in UnParserSettings (it's false by default):
+```cs
+SkipDefault =true;  //it's false by default
+```
+__Example__:
+```cs
+class Options
+        {
+            [Option(Default = 99)] //should be skipped when P1=99
+            public  int P1 { get;set;}
+            [Option()]
+            public  string P2 { get;set;}
+            [Option(Default = 88)] //should be skipped when P3=88
+            public  int P3 { get;set;}
+        }
+
+var options = new Options{P2="xyz" ,P1=99, P3=88}	;
+
+string args=  CommandLine.Parser.Default.FormatCommandLine(options, config=>config.SkipDefault =true);
+
+//  args should be:  --p2 xyz   
+```
+
+__Note__:
+
+- DatTime, TimeSpan and DateTimeOffset are formated as quoted string:
+```
+--start "1/4/2019 11:48:34 PM"
+```
+- When you use int Nullable type as option, the default value is null not 0.
+In this case when we pass 0 to parameter it will be added to the arguments.
+
+## UnParsing Demo
+
+[<img src="media/tryit.png">](https://dotnetfiddle.net/8gPgBK)
