@@ -233,29 +233,6 @@ public class Program
 [<img src="media/tryit.png">](https://dotnetfiddle.net/IvOG57)
 
 
-# Using WithParsed in async/await
-
-```csharp
-public class Program
-{
-  public static async Task Main(string[] args)
-  {
-    var result = Parser.Default.ParseArguments<Options>(args)
-               .WithParsed(async options => await RunAsync(options));
-    
-  }
-
-  //async method
-  static async Task RunAsync(Options options)
-  {
-    options.Dump();
-    await Task.Delay(20); //simulate async method    
-  }
-}
-```
-
-[<img src="media/tryit.png">](https://dotnetfiddle.net/jRmtG1)
-
 
 ## Project Template
 
