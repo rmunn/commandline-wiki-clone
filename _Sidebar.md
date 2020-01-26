@@ -9,6 +9,7 @@
 - **HelpText**
   - [[Generating Help and Usage information]]
   - [[HelpText Configuration]]
+  - [[Help Localization]]
 - [[Unparsing]]
 - [[How To]]
 - [[Upgrading from previous v1.9]]
