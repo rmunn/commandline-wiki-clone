@@ -253,6 +253,27 @@ HelpText use these attributes by default to generate the heading text and copyri
 
 Heading and copyright can be modified in custom help by changing the `Heading and Copyright` properties.
 
+## HelpText in V2.7+
+A new overload method `AutoBuild` is added which simplify the Custom Help as given below:
+
+```cs
+ public static HelpText AutoBuild<T>(ParserResult<T> parserResult, Func<HelpText, HelpText> onError, int maxDisplayWidth = DefaultMaximumLength)
+       
+```
+```cs
+static void DisplayHelp<T>(ParserResult<T> result)
+{
+  var helpText = HelpText.AutoBuild(result, h =>
+  {
+    h.AddPostOptionsLine(dynamicData());
+    return h;
+  });  //without the option e=>e
+  Console.WriteLine(helpText);
+}
+```
+
+
+
 # See also
 
 **HelpText API**, [[HelpText| T_CommandLine_Text_HelpText]]

@@ -58,3 +58,7 @@ Copyright (c) 2019 Global.com
   --prefix (Group: append) Prefix to append to file name
   --suffix (Group: append) Suffix to append to file name
 ```
+
+__Remarks__
+- The Group options are available in v2.7+
+- Both SetName and Group are not applicable to the option at the same time. Only SetName OR Group can be applied on the option.
