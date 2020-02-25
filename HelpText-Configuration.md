@@ -10,7 +10,7 @@ var parser = new CommandLine.Parser(with => with.HelpWriter = null);
 var parserResult = parser.ParseArguments<Options>(args);
 
 //3- generate help based on result and parameters
-var helpText = HelpText.AutoBuild(result, h =>
+var helpText = HelpText.AutoBuild(parserResult, h =>
 {
   //configure HelpText
   h.AdditionalNewLineAfterOption = false; //remove newline between options
