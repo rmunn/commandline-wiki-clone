@@ -68,3 +68,59 @@ C:\> app help
 ```
 
 Or will display a help screen for available verbs.
+
+***Remark***
+
+In case of using one verb, you can use `object' as a second verb (dummy verb) as given below:
+
+
+```cs
+//use object as a dummy verb
+Parser.Default.ParseArguments<Options,object> (args)
+```
+At least two verbs are needed.
+
+**Using Verbs as Array of Types**
+
+You can pass array of verb types to the parser.
+ The overload method `ParseArguments` has Type as an array Type[]:
+
+```cs
+public ParserResult<object> ParseArguments(IEnumerable<string> args, params Type[] types)
+```
+This overload method is valuable when implementing the verbs as a plugin.
+You collect the verbs using a **plugin** loader or **DI container** like Autofac or any DI container.
+
+***Example***
+
+```cs
+static void Main1(string[] args)
+{
+    Type[] types = { typeof(AddOptions), typeof(CommitOptions), typeof(CloneOptions) };
+    Parser.Default.ParseArguments(args, types)
+        .WithParsed(Run)
+        .WithNotParsed(HandleErrors);
+}
+
+
+
+private static void Run(object obj)
+{
+    switch (obj)
+    {
+        case CloneOptions c:
+            //process CloneOptions
+            break;
+        case CommitOptions o:
+            //process CommitOptions
+            break;
+        case AddOptions a:
+            //process AddOptions
+            break;
+    }
+}
+
+```
+
+[<img src="media/tryit.png">](https://dotnetfiddle.net/stVEDu)
+
