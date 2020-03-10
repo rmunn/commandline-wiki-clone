@@ -284,3 +284,114 @@ class Options
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/ovpkf1)
 
+---------
+
+## Q7
+
+**How to Display version information on Application startup?**
+
+**Answer:**
+
+Help system  show version on the header of HelpText.
+
+You can access version information from the public Property: `HeadingInfo.Default`
+
+**Example:**
+```cs
+//at start of application you may show Application version
+Console.WriteLine(HeadingInfo.Default);
+```
+
+output:
+```
+$ MyApp  1.2.3.456
+```
+
+Version is displayed in the format:
+```
+<programName><version>
+```
+`programName` is read from `AssemblyTitleAttribute` or `GetAssemblyName()` when the `AssemblyTitleAttribute` is null.
+
+`version`  is read from `AssemblyInformationalVersionAttribute`.
+
+Header text can be customised with non standard version (SemVer) using the public constructor:
+```cs
+public HeadingInfo(string programName, string version = null)
+```
+
+
+
+**Example:**
+```cs
+
+var title=new HeadingInfo(programName:"My supper Application",version:"1.2.3; App-Server:3.6.7");
+Console.WriteLine( title  );
+```  
+
+output:
+```
+$ My Application 1.2.3; App-Server:3.6.7
+```
+---------
+
+## Q8
+
+**How to Display Copyright information on Application startup?**
+
+**Answer:**
+
+Help system  shows Copyright on the header of HelpText.
+You can access Copyright text from the public Property: `CopyrightInfo.Default`
+
+**Example:**
+```cs
+//at start of application you may show Application version
+Console.WriteLine(CopyrightInfo.Default);
+```
+
+output sample:
+```
+$ Copyright (C) 2020  Four Season Company
+```
+Copyright text is read from `AssemblyCopyrightAttribute` if it's available.
+If the `AssemblyCopyrightAttribute` is null, it's composed in the form as:
+```
+Copyright (C) <Author><Years>
+```
+
+Author: The company or person holding the copyright and it's read from `AssemblyCompanyAttribute`.
+Years: The copyrightYears of coverage of copyright.
+ 
+
+Copyright text  can be customised using one of the overload constructors:
+```cs
+public CopyrightInfo(string author, int year);
+public CopyrightInfo(string author, params int[] years);
+public CopyrightInfo(bool isSymbolUpper, string author, params int[] copyrightYears);
+```
+
+Example:
+```cs
+var title=new HeadingInfo(programName:"My supper Application",version:"1.2.3; App-Server:3.6.7");
+Console.WriteLine( title  );
+```  
+output:
+```
+$ My Application 1.2.3; App-Server:3.6.7
+```
+
+Yo can add this wrapper  class to your application:
+
+```cs
+class ApplicationInfo
+{
+   public static string Version   =>HeadingInfo.Default;
+   public static string Copyright =>CopyrightInfo.Default;
+   public static void ShowIntro()
+   {
+     Console.WriteLine(Version);
+	 Console.WriteLine(Copyright);
+   }
+}
+```
