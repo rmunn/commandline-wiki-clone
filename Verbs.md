@@ -89,35 +89,43 @@ You can pass array of verb types to the parser.
 public ParserResult<object> ParseArguments(IEnumerable<string> args, params Type[] types)
 ```
 This overload method is valuable when implementing the verbs as a plugin.
-You collect the verbs using a **plugin** loader or **DI container** like Autofac or any DI container.
+You collect the verbs using a **plugin** loader or **Ioc container** like Autofac or any DI container.
 
 ***Example***
 
 ```cs
 static void Main1(string[] args)
 {
-    Type[] types = { typeof(AddOptions), typeof(CommitOptions), typeof(CloneOptions) };
-    Parser.Default.ParseArguments(args, types)
+    //Type[] types = { typeof(AddOptions), typeof(CommitOptions), typeof(CloneOptions) };
+    //or collect types using reflection /plugins /Ioc container
+  var types = LoadVerbs();			
+
+  Parser.Default.ParseArguments(args, types)
         .WithParsed(Run)
         .WithNotParsed(HandleErrors);
 }
 
-
+//load all types using Reflection
+private	static Type[] LoadVerbs()
+{
+  return Assembly.GetExecutingAssembly().GetTypes()
+	  .Where(t => t.GetCustomAttribute<VerbAttribute>() != null).ToArray();		 
+}
 
 private static void Run(object obj)
 {
-    switch (obj)
-    {
-        case CloneOptions c:
-            //process CloneOptions
-            break;
-        case CommitOptions o:
-            //process CommitOptions
-            break;
-        case AddOptions a:
-            //process AddOptions
-            break;
-    }
+  switch (obj)
+  {
+    case CloneOptions c:
+          //process CloneOptions
+        break;
+    case CommitOptions o:
+          //process CommitOptions
+        break;
+    case AddOptions a:
+          //process AddOptions
+        break;
+  }
 }
 
 ```
