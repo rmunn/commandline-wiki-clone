@@ -132,3 +132,8 @@ private static void Run(object obj)
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/stVEDu)
 
+**Remark**
+
+The generic overload method:  ```ParseArguments(string[] args, Type[] types)``` support more than 16 verbs.
+
+The overload method ```ParseArguments<T1,..,T16>(string[] args)``` support only 16 verbs.

@@ -212,26 +212,52 @@ public class Program
 {
   public static async Task Main(string[] args)
   {
-    var result = Parser.Default.ParseArguments<Options>(args)
-     .MapResult(async options => await RunAndReturnExitCodeAsync(options), _ => Task.FromResult(1));
+    var retValue = await Parser.Default.ParseArguments<Options>(args)
+     .MapResult(RunAndReturnExitCodeAsync), _ => Task.FromResult(1));
     //or more simpler using Method group
-    // .MapResult(RunAndReturnExitCodeAsync), _ => Task.FromResult(1));
-    Console.WriteLine($"retCode={result.Result}");
-    return Task.CompletedTask;
+    
+    Console.WriteLine($"retValue= {retValue}");
+    
   }
 
   //async method
   static async Task<int> RunAndReturnExitCodeAsync(Options options)
   {
-    options.Dump();
+    Console.WriteLine("Before Task");
     await Task.Delay(20); //simulate async method
+    Console.WriteLine("After Task");
     return 0;
   }
 }
 ```
 
-[<img src="media/tryit.png">](https://dotnetfiddle.net/IvOG57)
+[<img src="media/tryit.png">](https://dotnetfiddle.net/8c6y9E)
 
+# Using WithParsedAsync in async/await
+Starting V2.8+, ```WithParsedAsync/ WithNotParsedAsync``` are available to support async/await.
+
+Example:
+```csharp
+public class Program
+{
+  public static async Task Main(string[] args)
+  {
+    await Parser.Default.ParseArguments<Options>(args)
+               .WithParsedAsync (RunAsync);
+    Console.WriteLine($"Exit code= {Environment.ExitCode}");
+  }
+
+  //async method
+  static async Task RunAsync(Options options)
+  {
+    Console.WriteLine("Before Task");
+    await Task.Delay(20); //simulate async method 
+    Console.WriteLine("After Task");   
+  }
+}
+```
+
+[<img src="media/tryit.png">](https://dotnetfiddle.net/CYSSp9)
 
 
 ## Project Template
