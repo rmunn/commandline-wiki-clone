@@ -395,3 +395,28 @@ class ApplicationInfo
    }
 }
 ```
+
+---------
+
+## Q9
+
+**How to set the boolean option to false( toglle-switch boolean option)?**
+
+**Answer:**
+
+
+Using Nullable bool, you can toggle the value of option, example:
+```cs
+//set default as true
+[Option(Default = (bool)true)]
+public bool? Visible {get;set;}
+```
+
+CommandLine can be:
+```sh
+$ --visible true   # Visible =true
+$ --visible false # Visible =false
+
+no option for visible  # Visible =true, the default value is set to true
+no default value and no option in commandline # Visible=null
+```

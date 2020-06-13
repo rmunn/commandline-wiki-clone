@@ -2,6 +2,7 @@
 
 - [[Home]]
 - [[Getting Started]]
+- [[Option Attribute]]
 - [[Immutable Options Type]]
 - [[Mutually Exclusive Options]]
 - [[Option Groups]]
