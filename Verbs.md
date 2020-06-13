@@ -55,20 +55,19 @@ static int Main(string[] args) {
 }
 ```
 
-In this scenario the parser supplies you an additional `help` verb that allows:
+##Display help for verb##
 
+Example: Display a help screen for all available verbs.
+
+```sh
+$ app --help
 ```
-C:\> app help clone
+Example: Display the help screen for `clone` verb.
+
+```sh
+#the official syntax to call help for a verb: <VerbName> --help
+$ app clone --help
 ```
-
-In this way application users can display specific verb command help screen.
-
-```
-C:\> app help
-```
-
-Or will display a help screen for available verbs.
-
 ***Remark***
 
 In case of using one verb, you can use `object' as a second verb (dummy verb) as given below:
