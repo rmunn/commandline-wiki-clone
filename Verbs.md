@@ -55,7 +55,7 @@ static int Main(string[] args) {
 }
 ```
 
-##Display help for verb##
+## Display help for verbs
 
 Example: Display a help screen for all available verbs.
 

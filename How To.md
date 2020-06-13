@@ -400,7 +400,7 @@ class ApplicationInfo
 
 ## Q9
 
-**How to set the boolean option to false( toglle-switch boolean option)?**
+**How to set the boolean option to false( toggle-switch boolean option)?**
 
 **Answer:**
 

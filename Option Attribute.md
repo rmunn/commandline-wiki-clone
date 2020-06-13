@@ -19,7 +19,7 @@ OptionAttribute  class provides set of properties to enable the Property as a na
 | 	SetName |	Gets or sets the option's mutually exclusive set name.
 | 	ShortName |	Gets a short name of this command line option, made of one character.
 
-##Default##
+## Default
 
 Default Gets or sets mapped property default value. it's Set by the Parser when no optin is passed in the commandLine.
 
