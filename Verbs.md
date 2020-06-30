@@ -136,3 +136,42 @@ private static void Run(object obj)
 The generic overload method:  ```ParseArguments(string[] args, Type[] types)``` support more than 16 verbs.
 
 The overload method ```ParseArguments<T1,..,T16>(string[] args)``` support only 16 verbs.
+
+## Default Verb
+When verb is default, you need not to pass verb name in the command line.
+Instead of
+```sh
+#copy is verb name
+$ myapp copy -a xyz --verbose
+```		
+you can drop the verb name `copy` as in non-verb option and  run:
+```sh
+$ myapp  -a xyz --verbose   
+```	
+
+Default verb is configured by setting `isDefault =true` as:
+```cs
+[Verb("copy",isDefault: true, HelpText = "Copy some stuff" )]
+public class DefaultVerbOption
+{
+	[Option('a', "alpha", Required = true)]
+	public string Option { get; set; }
+}
+```
+
+Or 
+```cs
+[Verb("copy",true, HelpText = "Copy some stuff" )]
+public class DefaultVerbOption
+{
+	[Option('a', "alpha", Required = true)]
+	public string Option { get; set; }
+}
+```
+By default, `isDefault =false` .
+
+Only one verb can be default, otherwise parser fire an Error Excption.
+
+**Remark**
+
+Default verb is available in v 2.8+
