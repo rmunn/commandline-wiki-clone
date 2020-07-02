@@ -35,10 +35,10 @@ A helper extension method is provided to simplify this task:
 ```csharp
 static int Main(string[] args) {
     Parser.Default.ParseArguments<AddOptions, CommitOptions, CloneOptions>(args)
-    .WithParsed<AddOptions>(opts => ...)
-    .WithParsed<CommitOptions>(opts => ...)
-    .WithParsed<CloneOptions>(opts => ...)
-    .WithNotParsed(errs => ...)
+    .WithParsed<AddOptions>(options => ...)
+    .WithParsed<CommitOptions>(options => ...)
+    .WithParsed<CloneOptions>(options => ...)
+    .WithNotParsed(errors => ...)
 }
 ```
 
@@ -48,10 +48,10 @@ Coherently with `ParseArguments<T1, T2, ...>()` overloads used for verbs, you ca
 static int Main(string[] args) =>
   Parser.Default.ParseArguments<AddOptions, CommitOptions, CloneOptions>(args)
     .MapResult(
-      (AddOptions opts) => RunAddAndReturnExitCode(opts),
-      (CommitOptions opts) => RunCommitAndReturnExitCode(opts),
-      (CloneOptions opts) => RunCloneAndReturnExitCode(opts),
-      errs => 1);
+      (AddOptions options) => RunAddAndReturnExitCode(opts),
+      (CommitOptions options) => RunCommitAndReturnExitCode(opts),
+      (CloneOptions options) => RunCloneAndReturnExitCode(opts),
+      errors => 1);
 ```
 
 ## Display help for verbs
