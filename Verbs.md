@@ -45,14 +45,13 @@ static int Main(string[] args) {
 Coherently with `ParseArguments<T1, T2, ...>()` overloads used for verbs, you can take advantage also of `MapResult<T1, T2, ...>()`. Like in the sample with a single target instance, here we turn the parsed verb into an exit code:
 
 ```csharp
-static int Main(string[] args) {
-  return Parser.Default.ParseArguments<AddOptions, CommitOptions, CloneOptions>(args)
+static int Main(string[] args) =>
+  Parser.Default.ParseArguments<AddOptions, CommitOptions, CloneOptions>(args)
     .MapResult(
       (AddOptions opts) => RunAddAndReturnExitCode(opts),
       (CommitOptions opts) => RunCommitAndReturnExitCode(opts),
       (CloneOptions opts) => RunCloneAndReturnExitCode(opts),
       errs => 1);
-}
 ```
 
 ## Display help for verbs
