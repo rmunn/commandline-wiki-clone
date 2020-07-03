@@ -160,7 +160,7 @@ Cloning without hard links:
 If you build `HelpText` instance by your own, you can rely on three methods to gather `Usage` attribute data:
 
 ```csharp
-static string RenderUsageText<T>(ParserResult<T> parserResult)
-static string RenderUsageText<T>(ParserResult<T> parserResult, Func<Example, Example> mapperFunc)
-static IEnumerable<string> RenderUsageTextAsLines<T>(ParserResult<T> parserResult, Func<Example, Example> mapperFunc)
+static string RenderUsageText<T>(ParserResult<T> parserResult);
+static string RenderUsageText<T>(ParserResult<T> parserResult, Func<Example, Example> mapperFunc);
+static IEnumerable<string> RenderUsageTextAsLines<T>(ParserResult<T> parserResult, Func<Example, Example> mapperFunc);
 ```
