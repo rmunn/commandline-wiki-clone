@@ -35,13 +35,13 @@ class Options
   [Option(Default=(short)100 )]
   public short ShortValue { get; set; }
 	
-  [Option( Default = (bool)true)]
+  [Option(Default = (bool)true)]
   public bool? Vsible { get; set; }
 	
-  [Option( Default = (double)5001.4)]
+  [Option(Default = (double)5001.4)]
   public double DoubleValue { get; set; }
 
-  [Option( Default = (float)401.3)]
+  [Option(Default = (float)401.3)]
   public float FloatValue { get; set; }
 }
 ```
