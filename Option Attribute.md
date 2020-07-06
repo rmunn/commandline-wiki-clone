@@ -23,8 +23,17 @@ OptionAttribute  class provides set of properties to enable the Property as a na
 
 Default Gets or sets mapped property default value. it's Set by the Parser when no optin is passed in the commandLine.
 
-Default property is object type and need to be casted as in the below example.
+When `Default` is set to null it may be ignored and the default values are set to:
+ 
+ - The IEnumerables are initialized to empty arrays rather than null.
+ - All value type ( int, long ... ) can not be null and the Parser set the default values as described in [Default values of C# types](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values)
+
+ 
+Default property is object type and need to be casted (Unboxing) to an explicit conversion.
+
 Parser may fire an Exception when it can't convert the value to the target type.
+
+The following example show Unboxing the Default Explictly:
 
 ```cs
 class Options
@@ -50,11 +59,11 @@ For decimal values, it can not be casted like:
 ```cs
 //this is not allowed
 //Compiler Error: CS0182 An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type	
-[Option( Default = (decimal)401.3)]
+[Option( Default = (decimal)401.3M)] //Invalid for attribute parameters
 public decimal DecimalValue { get; set; }
 ```
 
-decimal type is not a valid Attribute Parameter (c# language constraint).
+decimal type is not a valid Attribute Parameter (c# language constraint) see [ref](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/attributes#attribute-parameter-types).
 
 
 

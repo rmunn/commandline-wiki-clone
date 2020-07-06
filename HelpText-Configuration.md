@@ -27,7 +27,7 @@ result.WithNotParsed(errs => DisplayHelp(parserResult, errs));
 //for complete example see example1 and example2
 ```
 
-# HelpText layout
+## HelpText layout
 
 Help text is layout as in the following figure:
 
@@ -51,7 +51,7 @@ It's composed of the following sections:
 - **Pre_options**: is optional block before options.
 - **Post_options**: is optional block after options.
 
-# HelpText Setting
+## HelpText Setting
 
 HelpText can be configured using the following Properties and methods.
 
@@ -74,7 +74,7 @@ HelpText can be configured using the following Properties and methods.
 | AddPreOptionsLines           | Adds text lines after copyright and before options usage strings.                                                                                   |
 | AddPreOptionsText            | Adds a text block of lines after copyright and before options usage strings.                                                                        |
 
-# Example: 1
+### Example: 1
 
 To use custom help, disable auto generating help by configuring Parser.HelpWriter= null.
 Use `AutoBuild` method to build help.
@@ -118,8 +118,7 @@ Copyright (c) 2019 Global.com
 
   -r, --read         Input files to be processed.
   --verbose          (Default: false) Prints all messages to standard output.
-  --stdin            (Default: false) Read from stdin
-  -v, --version
+  --stdin            (Default: false) Read from stdin  
   --help             Display this help screen.
   --version          Display version information.
   offset (pos. 0)    File offset.
@@ -143,7 +142,7 @@ ERROR(S):
 
 ```
 
-# Example: 2
+### Example: 2
 
 Control displaying help, version and errors based on the type of error using the extension methods: `IsVersion() or IsHelp()`
 
@@ -170,7 +169,7 @@ static void DisplayHelp<T>(ParserResult<T> result, IEnumerable<Error> errs)
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/fMVNMC)
 
-# Example: 3
+### Example: 3
 
 Adding dynamic contents computed at runtime.
 
@@ -210,7 +209,53 @@ Copyright (c) 2019 Global.com
 windir=C:\Windows
 ```
 
-# Setting AssemblyInfo Attributes
+## Complete Help Demo Example
+
+<details>
+  <summary>Click to expand!</summary>
+
+```cs
+class Program {
+    static int Main(string[] args) {
+        var parserResult = new Parser(c => c.HelpWriter = null).ParseArguments<Options>(args);
+        return parserResult.MapResult(
+            (Options opts) => new Run(opts),
+            errs => Console.WriteLine(DisplayHelp(parserResult))
+        );
+}
+
+    static int DisplayHelp(ParserResult<object> parserResult) {
+        Console.WriteLine(HelpText.AutoBuild(parserResult, h => {
+          h.AdditionalNewLineAfterOption = false;
+          h.Heading = "Myapp 2.0.0-beta"; //change header
+          h.Copyright = "Copyright (c) 2019 Global.com"; //change copyright text
+          return h;
+        }));
+        return 1;
+    }
+}
+
+class Options
+{
+  [Option('r', "read", Required = false, HelpText = "Input files to be processed.")]
+  public IEnumerable<string> InputFiles { get; set; }
+
+  // Omitting long name, defaults to name of property, ie "--verbose"
+  [Option(Default = false,	HelpText = "Prints all messages to standard output.")]
+  public bool Verbose { get; set; }
+  
+  [Option("stdin",	Default = false,	HelpText = "Read from stdin")]
+  public bool stdin { get; set; }
+
+  [Value(0, MetaName = "offset", HelpText = "File offset.")]
+  public long? Offset { get; set; }
+}
+```
+
+</details>
+
+
+## Setting AssemblyInfo Attributes
 
 HelpText retrieve AssemblyAttributes values to show header and copyright in help.
 The next AssemblyAttributes should be set:
@@ -239,7 +284,7 @@ If you are not using `AssemblyInfo.cs`, Add these lines to the project file, jus
 </PropertyGroup>
 ```
 
-Modify the contents as your need.
+Modify the xml elements based on your values.
 
 The new SDK for `msbuild` is auto generating an `AssemblyInfo` file during build including the assemblyAttributes described above.
 
