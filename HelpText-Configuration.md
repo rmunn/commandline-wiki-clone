@@ -82,7 +82,7 @@ Use `AutoBuild` method to build help.
 This example configure HelpText with `AdditionalNewLineAfterOption`
 
 ```cs
-static void Main1(string[] args)
+static void Main(string[] args)
 {
   var parser = new CommandLine.Parser(with => with.HelpWriter = null);
   var parserResult = parser.ParseArguments<Options>(args);
@@ -91,8 +91,8 @@ static void Main1(string[] args)
     .WithNotParsed(errs => DisplayHelp(parserResult, errs));
 }
 
-static void DisplayHelp<T>(ParserResult<T> result, IEnumerable<Error> errs)
-{
+static void DisplayHelp<T>(ParserResult<T> result)
+{  
   var helpText = HelpText.AutoBuild(result, h =>
   {
     h.AdditionalNewLineAfterOption = false;
@@ -111,6 +111,9 @@ private static void Run(Options options)
 [<img src="media/tryit.png">](https://dotnetfiddle.net/8GgWPP)
 
 Help is generated without a newline between options and setting heading and copyright text as displayed below:
+
+<details>
+  <summary>Click to expand!</summary>
 
 ```
 Myapp 2.0.0-beta
@@ -141,6 +144,8 @@ ERROR(S):
   offset (pos. 0)    File offset.
 
 ```
+
+</details>
 
 ### Example: 2
 
@@ -215,24 +220,27 @@ windir=C:\Windows
   <summary>Click to expand!</summary>
 
 ```cs
-class Program {
-    static int Main(string[] args) {
-        var parserResult = new Parser(c => c.HelpWriter = null).ParseArguments<Options>(args);
-        return parserResult.MapResult(
-            (Options opts) => new Run(opts),
-            errs => Console.WriteLine(DisplayHelp(parserResult))
+class Program 
+{
+  static int Main(string[] args) 
+  {
+    var parserResult = new Parser(c => c.HelpWriter = null).ParseArguments<Options>(args);
+    return parserResult.MapResult(
+        (Options opts) => new Run(opts),
+        errs => Console.WriteLine(DisplayHelp(parserResult))
         );
-}
+  }
 
-    static int DisplayHelp(ParserResult<object> parserResult) {
-        Console.WriteLine(HelpText.AutoBuild(parserResult, h => {
-          h.AdditionalNewLineAfterOption = false;
-          h.Heading = "Myapp 2.0.0-beta"; //change header
-          h.Copyright = "Copyright (c) 2019 Global.com"; //change copyright text
-          return h;
-        }));
-        return 1;
-    }
+  static int DisplayHelp(ParserResult<object> parserResult) 
+  {
+      Console.WriteLine(HelpText.AutoBuild(parserResult, h => {
+        h.AdditionalNewLineAfterOption = false;
+        h.Heading = "Myapp 2.0.0-beta"; //change header
+        h.Copyright = "Copyright (c) 2019 Global.com"; //change copyright text
+        return h;
+      }));
+      return 1;
+  }
 }
 
 class Options
