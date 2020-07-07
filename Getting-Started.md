@@ -3,6 +3,11 @@ Firstly, install the package within the Package Manager in Visual Studio to down
 ```
 PM> Install-Package CommandLineParser
 ```
+For F#
+
+```
+PM> Install-Package CommandLineParser.FSharp
+```
 
 You can use the next template for Console Project in VS 2017 or above:
 
