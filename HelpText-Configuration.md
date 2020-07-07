@@ -325,8 +325,62 @@ static void DisplayHelp<T>(ParserResult<T> result)
 }
 ```
 
+## Custom Help for verbs
 
+The overload method of AutoBuild has `verbsIndex` parameter which enables of  displaying  help summary for verbs.
+By default, `verbsIndex= false`
 
+The syntax of the `AutoBuild` method is:
+
+```cs
+public static HelpText AutoBuild<T>(
+            ParserResult<T> parserResult,
+            Func<HelpText, HelpText> onError,
+            Func<Example, Example> onExample,
+            bool verbsIndex = false,
+            int maxDisplayWidth = DefaultMaximumLength)
+```
+To display custom help for verbs and display help summary:
+
+```cs
+int DisplayHelp<T>(ParserResult<T> result)
+{
+  var helpText = HelpText.AutoBuild(result, h =>
+  {
+    h.AdditionalNewLineAfterOption = false;
+    h.Heading = "Myapp 2.0.0-beta"; //change header
+    h.Copyright = "Copyright (c) 2019 Global.com"; //change copyright text
+    return h;
+  }, 
+  e => e,
+  verbsIndex:true);  //set verbsIndex to display verb help summary.
+  Console.WriteLine(helpText);
+  return -1;
+}
+```  
+**Example:** To display help summary of verbs, run the command:
+```
+$ myapp help
+#or
+$ myapp --help
+```
+The Output help text:
+
+```
+Myapp 2.0.0-beta
+Copyright (c) 2019 Global.com
+
+  add        Add files
+  edit       Edit files
+  help       Display more information on a specific command.
+  version    Display version information.
+
+```
+**Example:** To display help of a verb, run the command:
+```
+$ myapp add --help
+
+```
 # See also
 
 **HelpText API**, [[HelpText| T_CommandLine_Text_HelpText]]

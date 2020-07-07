@@ -54,19 +54,6 @@ static int Main(string[] args) =>
       errors => 1);
 ```
 
-## Display help for verbs
-
-Example: Display a help screen for all available verbs.
-
-```sh
-$ app --help
-```
-Example: Display the help screen for `clone` verb.
-
-```sh
-#the official syntax to call help for a verb: <VerbName> --help
-$ app clone --help
-```
 ***Remark***
 
 In case of using one verb, you can use `object' as a second verb (dummy verb) as given below:
@@ -92,7 +79,7 @@ You collect the verbs using a **plugin** loader or **Ioc container** like Autofa
 ***Example***
 
 ```cs
-static void Main1(string[] args)
+static void Main(string[] args)
 {
     //Type[] types = { typeof(AddOptions), typeof(CommitOptions), typeof(CloneOptions) };
     //or collect types using reflection /plugins /Ioc container
@@ -174,3 +161,20 @@ Only one verb can be default, otherwise parser fire an Error Excption.
 **Remark**
 
 Default verb is available in v 2.8+
+
+## Display help for verbs
+
+Example: Display a help screen for all available verbs.
+
+```sh
+$ app --help
+#or
+$ app help
+```
+Example: Display the help screen for `clone` verb.
+
+```sh
+#the official syntax to call help for a verb: <VerbName> --help
+$ app clone --help
+```
+For Custom help of verbs, see [[Custom Help for verbs| HelpText-Configuration#Custom Help for verbs]]
