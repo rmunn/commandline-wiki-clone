@@ -2,6 +2,7 @@
 
 - [[Home]]
 - [[Getting Started]]
+- [[CommandLine-Grammar]]
 - [[Option Attribute]]
 - [[Immutable Options Type]]
 - [[Mutually Exclusive Options]]

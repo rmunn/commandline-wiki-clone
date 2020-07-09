@@ -3,9 +3,8 @@ CommandLineParser provides F# package `CommandLineParser.FSharp` published to [n
 ```
 PM> Install-Package CommandLineParser.FSharp
 ```
-The package help in avoiding some Type conversion errors when using C# `CommandLineParser` package in F# development.
 
-The package auto install the dependency: `FSharp.Core`.
+The package has a dependency on: `FSharp.Core`.
 
 You can use all the features of c# package without limitation.
 
