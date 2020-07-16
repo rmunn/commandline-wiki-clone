@@ -11,6 +11,7 @@
 - **HelpText**
   - [[Generating Help and Usage information]]
   - [[HelpText Configuration]]
+  - [[Reordering Options]]
   - [[Help Localization]]
 - [[Unparsing]]
 - [[How To]]
