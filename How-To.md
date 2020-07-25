@@ -18,8 +18,8 @@ void Main(string[] args)
     {
       var helpText = HelpText.AutoBuild(parserResult, h =>
       {
-        h.AutoHelp = false;     //hide --help
-        h.AutoVersion = false;  //hide --version
+        h.AutoHelp = false;     // hides --help
+        h.AutoVersion = false;  // hides --version
         return HelpText.DefaultParsingErrorsHandler(parserResult, h);
       }, e => e);
       Console.WriteLine(helpText);
