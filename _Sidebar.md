@@ -17,6 +17,7 @@
 - [[How To]]
 - **Advanced Topics**
   - [[Multi-Culture Support]]
+  - [[Enum Flags]]
 - [[F# Development]]  
 - More
   - [[Upgrading from previous v1.9]]
