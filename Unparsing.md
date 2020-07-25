@@ -94,6 +94,24 @@ __Note__:
 - When you use int Nullable type as option, the default value is null not 0.
 In this case when we pass 0 to parameter it will be added to the arguments.
 
-## UnParsing Demo
+## Unparsing to array of strings
+In some Scenarios, you may in need to get the arguments as an array of strings to be passed to other application or to the Parser again (round trip).
+In this case you can use the method `FormatCommandLineArgs`.
+
+### Example
+
+```cs
+string[] argsArray = CommandLine.Parser.Default.FormatCommandLineArgs(options, config => config.SkipDefault = true);
+
+//you can parse the generated args array directly.
+//round trip options ->args -> options by parsing
+//parse the generated args and get Options again
+var result = Parser.Default.ParseArguments<Options>(argsArray);
+
+```
+**Remark: ** This method is available in v2.9+.
+
+### UnParsing Demo
 
 [<img src="media/tryit.png">](https://dotnetfiddle.net/8gPgBK)
+
